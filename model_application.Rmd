@@ -2,7 +2,9 @@
 title: "Assignment2"
 author: "Michelle Lam and Alex Reed"
 date: "`r Sys.Date()`"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -11,9 +13,22 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 ```
 
+## Conceptual Model
+
+![Almond Model Function Diagram](almond_yield_diagram.png)
+
+## Application of Function
+```{r}
+source("almond_model.R")
+
+almond_model("clim.txt")
+```
+
+
+## Creating Function Variables/Exploration
 ```{r}
 #read in climate data
-clim_df2 <- read.table("clim.txt", header = TRUE)
+clim_df <- read.table("clim.txt", header = TRUE)
 ```
 
 ### Pre-processing data
@@ -39,6 +54,7 @@ plist <- as.list(yearly_precip_jan)
 tmin_precip_df <- left_join(yearly_tmin_feb, yearly_precip_jan)
 ```
 
+### For Loop
 ```{r}
 #for loop
 anomaly_list <- list()
@@ -55,6 +71,7 @@ for (year in 1:nrow(tmin_precip_df)) {
 anomaly_vect <- unlist(anomaly_list)
 ```
 
+### Results
 ```{r}
 #minimum value in the vect
 min_val <- min(anomaly_vect)
