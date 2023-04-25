@@ -26,6 +26,7 @@ almond_model("clim.txt")
 
 
 ## Creating Function Variables/Exploration
+The below chunks outline the steps inside the function that we created.
 ```{r}
 #read in climate data
 clim_df <- read.table("clim.txt", header = TRUE)
@@ -81,6 +82,8 @@ max_val <- max(anomaly_vect)
 
 #mean value in the vect
 mean_val <- mean(anomaly_vect)
+
+results_df <- data.frame(min_val, max_val, mean_val)
 ```
 
 

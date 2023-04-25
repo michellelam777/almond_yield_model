@@ -42,10 +42,10 @@ almond_model <- function(file_path) {
  min_val = min(anomaly_vect)
  max_val = max(anomaly_vect)
  mean_val = mean(anomaly_vect)
-  
- print(paste("The maximum almond yield anomaly is approximately", round((max_val), 0) , "ton/acre."))
- print(paste("The minimum almond yield anomaly is approximately", round((min_val), 3), "ton/acre."))
- print(paste("The mean almond yield anomaly is approximately", round((mean_val), 0), "ton/acre."))
+ 
+ results_df <- data.frame(min_val, max_val, mean_val)
+ 
+ return(results_df)
  
 }
 
