@@ -5,6 +5,7 @@ date: "`r Sys.Date()`"
 output:
   pdf_document: default
   html_document: default
+  word_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -32,6 +33,15 @@ The below chunks outline the steps inside the function that we created.
 clim_df <- read.table("clim.txt", header = TRUE)
 ```
 
+### Setting Coefficient defaults 
+```{r}
+Tmincoeff1 = -0.015
+Tmincoeff2 = -0.0046
+Pcoeff1 = -0.07
+Pcoeff2 = 0.0043
+intercept = 0.28
+```
+
 ### Pre-processing data
 ```{r}
 #Tn2: temp min for each year for February
@@ -55,38 +65,26 @@ plist <- as.list(yearly_precip_jan)
 tmin_precip_df <- left_join(yearly_tmin_feb, yearly_precip_jan)
 ```
 
-### For Loop
+### Calculate anomaly values
 ```{r}
-#for loop
-anomaly_list <- list()
+anomaly_value <- Tmincoeff1 * tmin_precip_df$min_temp_2 + Tmincoeff2 * (tmin_precip_df$min_temp_2**2) + Pcoeff1 * tmin_precip_df$precip_sum_1 + Pcoeff2 * (tmin_precip_df$precip_sum_1**2) + intercept
 
-for (year in 1:nrow(tmin_precip_df)) {
-  
-  # calculate anomaly value for each year and append it to the list
-  anomaly_value <- -0.015 * tmin_precip_df$min_temp_2[year] - 
-    0.0046 * (tmin_precip_df$min_temp_2[year]**2) - 
-    0.07 * tmin_precip_df$precip_sum_1[year] +
-    0.0043 * (tmin_precip_df$precip_sum_1[year]**2) + 0.28
-  
-  anomaly_list[[year]] <- anomaly_value
-  
-} 
-
-anomaly_vect <- unlist(anomaly_list)
+#add anomaly values to tmin_precip_df
+yield_df <- tmin_precip_df |>
+  cbind(anomaly_value = anomaly_value) 
 ```
 
 ### Results
 ```{r}
 #minimum value in the vect
-min_val <- min(anomaly_vect)
+min_val <- min(yield_df$anomaly_value)
 
 #maximum value in the vect
-max_val <- max(anomaly_vect)
+max_val <- max(yield_df$anomaly_value)
 
 #mean value in the vect
-mean_val <- mean(anomaly_vect)
+mean_val <- mean(yield_df$anomaly_value)
 
 results_df <- data.frame(min_val, max_val, mean_val)
 ```
-
 
