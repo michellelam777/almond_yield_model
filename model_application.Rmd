@@ -63,7 +63,10 @@ anomaly_list <- list()
 for (year in 1:nrow(tmin_precip_df)) {
   
   # calculate anomaly value for each year and append it to the list
-  anomaly_value <- -0.015 * tmin_precip_df$min_temp_2[year] - 0.0046 * (tmin_precip_df$min_temp_2[year]**2) - 0.07 * tmin_precip_df$precip_sum_1[year] +0.0043 * (tmin_precip_df$precip_sum_1[year]**2) + 0.28
+  anomaly_value <- -0.015 * tmin_precip_df$min_temp_2[year] - 
+    0.0046 * (tmin_precip_df$min_temp_2[year]**2) - 
+    0.07 * tmin_precip_df$precip_sum_1[year] +
+    0.0043 * (tmin_precip_df$precip_sum_1[year]**2) + 0.28
   
   anomaly_list[[year]] <- anomaly_value
   
