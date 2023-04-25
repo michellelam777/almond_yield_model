@@ -20,9 +20,9 @@ library(tidyverse)
 
 ## Application of Function
 ```{r}
-source("almond_model.R")
+source("calc_almond_yield.R")
 
-almond_model("clim.txt")
+calc_almond_yield("clim.txt")
 ```
 
 

@@ -1,10 +1,10 @@
 #' Almond Anomaly Yield Calculation
 #'
-#' @param clim_df climate data file in .txt format
-#' @param Tmincoeff1 First Temperature Minimum Coefficient for February default -0.015 (°C)
-#' @param Tmincoeff2 Second Temperature Minimum Coefficient for February default -0.0046 (°C)
-#' @param Pcoeff1 Precipitation Coefficient for January default -0.07 (mm)
-#' @param Pcoeff2 Precipitation Coefficient for January default 0.0043 (mm)
+#' @param clim_data climate data file in .txt format, contains daily temperatures (°C) and daily precipitation (mm)
+#' @param Tmincoeff1 First Temperature Minimum Coefficient for February default -0.015
+#' @param Tmincoeff2 Second Temperature Minimum Coefficient for February default -0.0046
+#' @param Pcoeff1 Precipitation Coefficient for January default -0.07
+#' @param Pcoeff2 Precipitation Coefficient for January default 0.0043
 #' @param intercept Intercept default 0.28
 #' @return maximum, minimum, and mean almond anomaly yield (ton/acre)
 #' @examples 
@@ -12,10 +12,10 @@
 #' @references 
 #' https://www.sciencedirect.com/science/article/pii/S016819230600308X
 
-almond_model <- function(clim_df, Tmincoeff1 = -0.015, Tmincoeff2 = -0.0046, Pcoeff1 = -0.07, Pcoeff2 = 0.0043, intercept = 0.28) {
+calc_almond_yield <- function(clim_data, Tmincoeff1 = -0.015, Tmincoeff2 = -0.0046, Pcoeff1 = -0.07, Pcoeff2 = 0.0043, intercept = 0.28) {
   
   # read in climate data
-  clim_df <- read.table(file_path, header = TRUE)
+  clim_df <- read.table(clim_data, header = TRUE)
   
   # calculate min temp for February and precip sum for January
   yearly_tmin_feb <- clim_df |>
