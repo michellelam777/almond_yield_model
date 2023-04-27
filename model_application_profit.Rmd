@@ -17,7 +17,7 @@ library(ggpubr)
 
 ## Conceptual Model including profit
 
-![Almond Model Function Diagram](almond_yield_diagram.png)
+![Almond Model Function Diagram](almond_yield_profit.png)
 
 ## Application of Function
 ```{r}
