@@ -48,7 +48,7 @@ calc_almond_yield <- function(clim_data, Tmincoeff1 = -0.015, Tmincoeff2 = -0.00
   
   results_df <- data.frame(min_val, max_val, mean_val)
   
-  return(results_df)
+  return(list(results = results_df, yield = yield_df))
   
 }
 

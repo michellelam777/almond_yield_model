@@ -12,6 +12,7 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 
 library(tidyverse)
+library(purrr)
 ```
 
 ## Conceptual Model
@@ -24,7 +25,6 @@ source("calc_almond_yield.R")
 
 calc_almond_yield("clim.txt")
 ```
-
 
 ## Creating Function Variables/Exploration
 The below chunks outline the steps inside the function that we created.
