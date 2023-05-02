@@ -17,13 +17,14 @@ calc_almond_yield <- function(clim_data, Tmincoeff1 = -0.015, Tmincoeff2 = -0.00
   # read in climate data
   clim_df <- read.table(clim_data, header = TRUE)
   
-  # calculate min temp for February and precip sum for January
+  # find the min temperature in February for each year
   yearly_tmin_feb <- clim_df |>
     group_by(year, month) |>
     summarize(min_temp_2 = min(tmin_c)) |>
     filter(month == 2) |>
     select(-month)
   
+  # find sum of precipitation in January for each year
   yearly_precip_jan <- clim_df |>
     group_by(year, month) |>
     summarize(precip_sum_1 = sum(precip)) |>
@@ -40,7 +41,7 @@ calc_almond_yield <- function(clim_data, Tmincoeff1 = -0.015, Tmincoeff2 = -0.00
   yield_df <- tmin_precip_df |>
     cbind(anomaly_value = anomaly_value) 
 
-  # return a list containing the anomaly vector, minimum value, maximum value, and mean value
+  # return a list containing the dataframe of yearly anomaly values and dataframe of minimum, maximum, and mean anomaly yields
   
   min_val = min(yield_df$anomaly_value)
   max_val = max(yield_df$anomaly_value)

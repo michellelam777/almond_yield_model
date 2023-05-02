@@ -3,7 +3,7 @@
 #' compute net present value
 #' @param value/cost ($)
 #' @param time in the future that cost/value occurs (years)
-#' @param discount rate 
+#' @param discount rate default 0.12
 #' @return value in $
 
 
